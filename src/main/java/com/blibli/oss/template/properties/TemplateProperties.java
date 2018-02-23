@@ -11,7 +11,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties("template.plugin")
 public class TemplateProperties {
 
-  private String prefix = "/template/";
+  private String prefix = "/templates/";
 
   private String suffix = TemplateLoader.DEFAULT_SUFFIX;
 }
