@@ -34,6 +34,31 @@ public class ApplicationTest {
     assertEquals("Hello Eko", result);
   }
 
+  @Test
+  public void testStringHelpers_capitalize() {
+    String result = templating.renderInline("hello {{capitalize name}}", Collections.singletonMap("name", "eko khannedy"));
+    assertEquals("hello Eko Khannedy", result);
+  }
+
+  @Test
+  public void testStringHelpers_percent() {
+    String result = templating.renderInline("hello {{numberFormat name 'percent'}}", Collections.singletonMap("name", 500000));
+    assertEquals("hello 50,000,000%", result);
+  }
+
+
+  @Test
+  public void testStringHelpers_currency() {
+    String result = templating.renderInline("hello {{numberFormat name 'currency'}}", Collections.singletonMap("name", 500000));
+    assertEquals("hello $500,000.00", result);
+  }
+
+  @Test
+  public void testStringHelpers_currencyID() {
+    String result = templating.renderInline("hello Rp {{numberFormat name 'integer' maximumFractionDigits=0}}", Collections.singletonMap("name", 500000));
+    assertEquals("hello Rp 500,000", result);
+  }
+
   @SpringBootApplication
   public static class Application {
 

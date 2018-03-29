@@ -6,6 +6,7 @@ import com.blibli.oss.template.properties.TemplateProperties;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.cache.ConcurrentMapTemplateCache;
 import com.github.jknack.handlebars.cache.TemplateCache;
+import com.github.jknack.handlebars.helper.StringHelpers;
 import com.github.jknack.handlebars.io.ClassPathTemplateLoader;
 import com.github.jknack.handlebars.io.TemplateLoader;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -39,9 +40,12 @@ public class TemplatingAutoConfiguration {
   @Bean
   @ConditionalOnMissingBean
   public Handlebars handlebars(TemplateLoader templateLoader, TemplateCache templateCache) {
-    return new Handlebars()
-        .with(templateLoader)
-        .with(templateCache);
+    Handlebars handlebars = new Handlebars()
+            .with(templateLoader)
+            .with(templateCache);
+    StringHelpers.register(handlebars);
+
+    return handlebars;
   }
 
   @Bean
